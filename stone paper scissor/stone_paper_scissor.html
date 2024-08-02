@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STONE PAPER SCISSOR</title>
+    <link rel="stylesheet" href="stone_paper_scissor.css">
+</head>
+<body>
+    <header>STONE PAPER SCISSOR GAME</header>
+    <hr style="margin: 5px;">
+    <main class="content">
+        <button onclick="showResult(computerChoice() , 'Stone');
+        document.querySelector('.final-score').innerHTML = `WON : ${showScore.won} LOST : ${showScore.lost} TIE : ${showScore.tie}`;
+        ">STONE</button>
+        <button onclick="showResult(computerChoice() , 'Paper');
+        document.querySelector('.final-score').innerHTML = `WON : ${showScore.won} LOST : ${showScore.lost} TIE : ${showScore.tie}`;
+        ">PAPER</button>
+        <button onclick="showResult(computerChoice() , 'Scissor');
+        document.querySelector('.final-score').innerHTML = `WON : ${showScore.won} LOST : ${showScore.lost} TIE : ${showScore.tie}`;
+        ">SCISSOR</button>
+        <div class="result">
+            <h3 class="computer-move"></h3>
+            <h3 class="user-move"></h3>
+            <h3 class="score">START GAME</h3>
+            <h3 class="final-score">WON : 0 LOST : 0 TIE : 0</h3>
+        </div>
+        <button onclick="
+        document.querySelector('.computer-move').innerHTML = '';
+        document.querySelector('.user-move').innerHTML = '';
+        document.querySelector('.score').innerHTML = 'START GAME';
+        showScore.won = 0;
+        showScore.lost = 0;
+        showScore.tie = 0;
+        document.querySelector('.final-score').innerHTML = 'WON : 0 LOST : 0 TIE : 0';
+        ">RESET</button>
+    </main>
+    <script>
+        function computerChoice()
+        {
+            random012 = Math.floor(Math.random()*3);
+            if(random012 === 0) return 'Stone';
+            if(random012 === 1) return 'Paper';
+            if(random012 === 2) return 'Scissor';
+        }
+        function showResult(computer_move , user_move)
+        {
+            document.querySelector('.computer-move').innerHTML = `COMPUTER MOVE : ${computer_move}`;
+            document.querySelector('.user-move').innerHTML = `YOUR MOVE : ${user_move}`;
+            if(computer_move === user_move)
+            {
+                document.querySelector('.score').innerHTML = "IT'S A TIE";
+                showScore.tie++;
+            }
+            else if((computer_move === 'Stone'  &&  user_move === 'Paper')  ||  (computer_move === 'Paper'  &&  user_move === 'Scissor')  ||  (computer_move === 'Scissor'  &&  user_move === 'Stone'))
+            {
+                document.querySelector('.score').innerHTML = 'YOU WON';
+                showScore.won++;
+            }
+            else
+            {
+                document.querySelector('.score').innerHTML = 'YOU LOST';
+                showScore.lost++;
+            }
+        }
+        let showScore = {
+            won : 0,
+            lost : 0,
+            tie : 0,
+        };
+    </script>
+</body>
+</html>
