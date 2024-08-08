@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO</title>
+    <link rel="stylesheet" href="to_do.css">
+</head>
+<body style="background-color: #212121;">
+    <header>TO-DO APP</header>
+    <main>
+        <input type="text" placeholder="Enter TODO here" id="text-field">
+        <input type="date" id="date-field">
+        <button id="add-button">ADD</button>
+    </main>
+    <hr>
+    <div id="todo-container"></div>
+    <script>
+        let textField= document.querySelector("#text-field");
+        let dateField= document.querySelector("#date-field");
+        let addButton= document.querySelector("#add-button");
+        let todoContainer= document.querySelector("#todo-container");
+        let todoList= [];
+        addButton.addEventListener('click' , ()=>{
+        if(textField.value  &&  dateField.value)
+        {
+            todoList.push({"textInput" : textField.value , "dateInput" : dateField.value})
+            textField.value = '';
+            dateField.value = '';
+            displayItems();
+        }
+        else
+        {
+            alert("PLEASE ENTER A VALID INPUT");
+        }} , false);
+        function displayItems()
+        {
+            let newHTML= ``;
+            todoList.forEach((e , i)=>{
+                newHTML += `
+                    <span>${e["textInput"]}</span>
+                    <span>${e["dateInput"]}</span>
+                    <button id="delete-button" onclick="
+                    todoList.splice(${i} , 1);
+                    displayItems();">Delete</button>`;
+            });
+            todoContainer.innerHTML = newHTML;
+        }
+    </script>
+</body>
+</html>
